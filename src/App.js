@@ -31,19 +31,33 @@ class App extends React.Component{
         colorCabello: 'Brown'
       }]
     }
+  
+  }
+  actualizarTodo = (nombreUsuario) =>{
+    let usuariosActulizado = this.state.usuarios;
+
+    for (let i = 0; i<usuariosActulizado.length;i++){
+      if(usuariosActulizado[i].nombre == nombreUsuario){
+        usuariosActulizado[i].edad+=1;
+      }
+    }
+
+    this.setState({
+      usuarios : usuariosActulizado
+    })
   }
   render() {
     const{usuarios}=this.state
     return(
-      <div className='usuario'>
-        {
-        usuarios.map((usuario,indice)=>{
-          return(
-            <PersonCard usuario={usuario} key={'usuario_' + indice}></PersonCard>
-          )
-        })
-        }
-      </div>
+        <div className='usuario'>
+          {
+            usuarios.map((usuario,indice)=>{
+              return(
+                <PersonCard usuario={usuario} actualizarTodo={this.actualizarTodo} key={'usuario_' + indice}/>
+              )
+            })
+          }
+        </div>
     ) 
   }
 }
